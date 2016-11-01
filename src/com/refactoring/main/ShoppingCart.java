@@ -1,3 +1,4 @@
+package com.refactoring.main;
 import java.util.*;
 import java.text.*;
 
@@ -46,6 +47,21 @@ public class ShoppingCart {
 
     /**
      * Formats shopping price.
+     *
+     * @return  string as lines, separated with \n,
+     *          first line:   # Item                   Price Quan. Discount      Total
+     *          second line: ---------------------------------------------------------
+     *          next lines:  NN Title                 $PP.PP    Q       DD%     $TT.TT
+     *                        1 Some title              $.30    2         -       $.60
+     *                        2 Some very long ti... $100.00    1       50%     $50.00
+     *                       ...
+     *                       31 Item 42              $999.00 1000         - $999000.00
+     *          end line:    ---------------------------------------------------------
+     *          last line:   31                                             $999050.60
+     *
+     *          Item title is trimmed to 20 chars adding '...'
+     *
+     *          if no items in cart returns "No items." string.
      */
     public String formatTicket() {
         if (items.size() == 0)
