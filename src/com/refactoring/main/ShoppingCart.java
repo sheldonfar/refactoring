@@ -6,7 +6,7 @@ import java.text.*;
  * Containing items and calculating price.
  */
 public class ShoppingCart {
-    public static enum ItemType {NEW, REGULAR, SECOND_FREE, SALE}
+    public enum ItemType {NEW, REGULAR, SECOND_FREE, SALE}
 
     /**
      * Tests all class methods.
@@ -25,7 +25,7 @@ public class ShoppingCart {
      * Adds new item.
      *
      * @param title    item title 1 to 32 symbols
-     * @param price    item ptice in USD, > 0
+     * @param price    item price in USD, > 0
      * @param quantity item quantity, from 1
      * @param type     item type
      * @throws IllegalArgumentException if some value is wrong
@@ -37,12 +37,8 @@ public class ShoppingCart {
             throw new IllegalArgumentException("Illegal price");
         if (quantity <= 0)
             throw new IllegalArgumentException("Illegal quantity");
-        Item item = new Item();
-        item.title = title;
-        item.price = price;
-        item.quantity = quantity;
-        item.type = type;
-        items.add(item);
+
+        items.add(new Item(title, price, quantity, type));
     }
 
     /**
@@ -195,10 +191,17 @@ public class ShoppingCart {
         double price;
         int quantity;
         ItemType type;
+
+        Item(String title, double price, int quantity, ItemType type) {
+            this.title = title;
+            this.price = price;
+            this.quantity = quantity;
+            this.type = type;
+        }
     }
 
     /**
      * Container for added items
      */
-    private List<Item> items = new ArrayList<Item>();
+    private List<Item> items = new ArrayList<>();
 }
