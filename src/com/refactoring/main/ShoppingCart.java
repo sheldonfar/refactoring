@@ -191,19 +191,13 @@ public class ShoppingCart {
                 discount = 0;
                 break;
             case SECOND_FREE:
-                if (quantity > 1)
-                    discount = 50;
+                discount = quantity > 1 ? 50 : 0;
                 break;
             case SALE:
                 discount = 70;
                 break;
         }
-        if (discount < 80) {
-            discount += quantity / 10;
-            if (discount > 80)
-                discount = 80;
-        }
-        return discount;
+        return Math.min(discount + quantity / 10, 80);
     }
 
     /**
