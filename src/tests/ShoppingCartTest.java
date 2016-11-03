@@ -69,4 +69,21 @@ public class ShoppingCartTest {
         assertEquals(71, ShoppingCart.calculateDiscount(ShoppingCart.ItemType.SALE, 10));
         assertEquals(70, ShoppingCart.calculateDiscount(ShoppingCart.ItemType.SALE, -1));
     }
+
+    @Test
+    public void formatTicket() {
+        ShoppingCart cart = new ShoppingCart();
+        cart.addItem("Apple", 0.99, 5, ShoppingCart.ItemType.NEW);
+        cart.addItem("Banana", 20.00, 4, ShoppingCart.ItemType.SECOND_FREE);
+        cart.addItem("A long piece of toilet paper", 17.20, 1, ShoppingCart.ItemType.SALE);
+        cart.addItem("Nails", 2.00, 500, ShoppingCart.ItemType.REGULAR);
+        assertEquals("# Item                          Price Quan. Discount   Total \n" +
+                "------------------------------------------------------------\n" +
+                "1 Apple                          $.99     5        -   $4.95 \n" +
+                "2 Banana                       $20.00     4      50%  $40.00 \n" +
+                "3 A long piece of toilet paper $17.20     1      70%   $5.16 \n" +
+                "4 Nails                         $2.00   500      50% $500.00 \n" +
+                "------------------------------------------------------------\n" +
+                "4                                                    $550.11 ", cart.formatTicket());
+    }
 }
